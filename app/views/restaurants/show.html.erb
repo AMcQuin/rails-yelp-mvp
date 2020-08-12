@@ -1,0 +1,39 @@
+<div class="container">
+
+  <p id="notice"><%= notice %></p>
+
+  <h1><%= @restaurant.name %></h1>
+
+  <p>
+    <strong>Address:</strong>
+    <%= @restaurant.address %>
+  </p>
+
+  <p>
+    <strong>Phone Number:</strong>
+    <%= @restaurant.phone_number %>
+  </p>
+
+  <p>
+    <strong>Category:</strong>
+    <%= @restaurant.category %>
+  </p>
+
+  <ul class="list-group">
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item">
+        <%= review.content %>
+        <span class="badge badge-secondary"><%= review.rating %> ❤️ </span>
+          </li>
+    <% end %>
+  </ul>
+</div>
+
+
+<div class="container">
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :content, as: :text %>
+      <%= f.input :rating, collection: 0..5 %>
+    <%= f.submit "Create Review", class: "btn btn-primary" %>
+  <% end %>
+</div>
